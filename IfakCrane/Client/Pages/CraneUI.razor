@@ -1,0 +1,98 @@
+﻿@page "/"
+@using IfakCrane.Client.Services;
+@using IfakCrane.Shared.Models;
+@using Newtonsoft.Json;
+@inject IJSRuntime jSRuntime
+
+
+
+<div style="display: flex;justify-content: center;align-items: center;height: 90vh;">
+    <div Style="width: 800px; height: 500px; background-color: #efc3c3;position:relative; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px" @onclick="AddBlurDot">
+
+        <div class="animated-card" Style="@RodStyle">
+            <div class="animated-circle" style="@circleStyle"></div>
+        </div>
+        @if (showDot)
+        {
+            <div class="blur-dot" style="left: @dotXpx; top: @dotYpx;"></div>
+        }
+        <div class="animated-card" Style="@RodStyle;margin-top:0px;background-color:darkgoldenrod">
+            <div class="animated-circle" style="@circleStyle;background-color:black"></div>
+        </div>
+    </div>
+   
+</div>
+
+    @RodStyle
+    @circleStyle
+
+
+
+@code {
+    
+
+    bool showDot = false;
+    double dotX = 0;
+    double dotY = 0;
+    string dotXpx => $"{dotX}px";
+    string dotYpx => $"{dotY}px";
+    private string circleStyle = "";
+    private string RodStyle = "";
+
+    [Inject]
+    public SignalRService signalR { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        signalR.OnReceivedPosition += AnimateCircle;
+        signalR.OnReceivedPosition += AnimateXaxis;
+
+        await signalR.StartConnection();
+    }
+    private async void AnimateCircle(TrolleyData data)
+    {
+
+        if (data.Y * 250 / 53200 >= 250)
+        {
+            circleStyle = $"transform: translateY({250}px);";
+        }
+        else { await Task.Run(() => { circleStyle = $"transform: translateY({(data.Y * 250 / 53200) - 12.5}px);"; }); }
+
+        
+        await InvokeAsync(StateHasChanged);
+        
+    }
+    private async void AnimateXaxis(TrolleyData data)
+    {
+
+        await Task.Run(() => { RodStyle = $"transform: translateX({data.X * 800 / 163000}px);"; });
+
+        await InvokeAsync(StateHasChanged);
+
+    }
+    public void AddBlurDot(MouseEventArgs e)
+    {
+        dotX = e.OffsetX;
+        dotY = e.OffsetY;
+        showDot = true;
+        if (dotY * 53200 / 250 >= 53200)
+        {
+            string[] dataArray = new string[]
+            {
+                "","defaulthmi","crane2","[\"\"]","trolley1","[\"\"]",$"{dotX*163000/800}",$"{53200}","0"};
+            signalR.PublishToServer("goto_topic", JsonConvert.SerializeObject(dataArray));
+        }
+        else
+        {
+            string[] dataArray = new string[]
+             {
+                "","defaulthmi","crane2","[\"\"]","trolley1","[\"\"]",$"{dotX*163000/800}",$"{dotY*53200/250}","0"};
+            signalR.PublishToServer("goto_topic", JsonConvert.SerializeObject(dataArray));
+        }
+
+
+    }
+   
+    
+}
+

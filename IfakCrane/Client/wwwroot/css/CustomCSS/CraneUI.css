@@ -1,0 +1,36 @@
+﻿.blur-dot {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    filter: blur(5px);
+    transform: translate(-50%, -50%);
+}
+
+.animated-circle {
+    width: 35px;
+    height: 35px;
+    background-color: blue;
+    border-radius: 50%;
+    position: relative;
+    right: 12px;
+    transition: transform 2s ease-in-out;
+}
+
+.animated-card {
+    width: 10px;
+    height: 250px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-top: 0px;
+    color: #7c7fec;
+    background-color: #6980cc;
+    transition: transform 4s ease-in-out;
+}
