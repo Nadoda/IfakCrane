@@ -1,0 +1,118 @@
+﻿@page "/Settings";
+@using System.Net;
+@using IfakCrane.Client.Services;
+@using Newtonsoft.Json;
+
+
+
+
+<RadzenFieldset Text="Crane Connection Configuration" Style="width:50%;background-color:#ddd7e7;font-weight:700">
+    <RadzenStack Gap="1rem">
+            <RadzenRow AlignItems="AlignItems.Center">
+                <RadzenColumn>
+                    <RadzenDropDown TValue="string" Value=@Crane Data=@Cranes Change="@(args => Crane = $"{args}")" Placeholder="Select the Crane" Style="margin-top: 5px;width:100%" />
+                </RadzenColumn>
+                <RadzenColumn>
+                <RadzenTextBox Placeholder="Enter the IP Address" Change=@(args => OnChange(args))></RadzenTextBox>
+                </RadzenColumn>
+                <RadzenColumn>
+                <button Style="width:100%;background-color:white;color:black; height:30px" @onclick="Connect">Connect</button>
+                </RadzenColumn>
+            </RadzenRow>
+    </RadzenStack>
+</RadzenFieldset>
+
+
+
+
+<RadzenDataGrid Style="margin-top:20px" AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@GridData" TItem="CraneData" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="CraneData" Property="CraneName" Title="Crane" Width="160px" />
+        <RadzenDataGridColumn TItem="CraneData" Property="ConnectedClientId" Title="Connection ID" Width="300px" />
+        <RadzenDataGridColumn TItem="CraneData" Property="ClientIPAddress" Title="IP Address" Width="160px" />
+        <RadzenDataGridColumn TItem="CraneData" Property="ConnectionStatus" Title="Connection Status" Width="160px" />
+    </Columns>
+</RadzenDataGrid>
+
+
+
+
+@code {
+    IEnumerable<string> Cranes { get; set; } = new List<string> { "crane1", "crane2" };
+    Dictionary<string,CraneData>? CranesData { get; set; }
+    List<CraneData>? GridData = new List<CraneData>();
+    string? Crane;
+    string? IpAddress;
+    [Inject]
+    public SignalRService? signalR { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        CranesData = new Dictionary<string, CraneData>(){{"crane1",null},{"crane2",null}};
+
+        signalR.OnMqttConnectionStatus += MqttConnectionStatusHandler;
+
+        await signalR.StartConnection();
+    }
+
+    public void OnChange(string value)
+    {
+        IPAddress? ipAddress;
+        if (IPAddress.TryParse(value, out ipAddress))
+        {
+            IpAddress = value;
+            Console.WriteLine($"IP Address {value} is valid");
+        }
+        else
+        {
+            IpAddress = null;
+            Console.WriteLine($"IP Address {value} is not valid");
+        }
+
+    }
+    public void Connect()
+    {
+        if(Crane != null && IpAddress != null)
+        {
+            signalR.ConnectToMQTT(Crane, IpAddress);
+        }
+        else
+        {
+            Console.WriteLine("Please check the Crane Selector & Ip Adress field");
+        }
+
+    }
+    private async void MqttConnectionStatusHandler(dynamic data)   // Animation on x-axis
+    {
+        var jsonObject = JsonConvert.DeserializeObject<dynamic>(data.ToString());
+        var Data = new CraneData()
+        {
+            CraneName= jsonObject["crane_Name"],
+            ConnectionStatus = jsonObject["connectionStatus"],
+            ConnectedClientId = jsonObject["connectedClientId"],
+            ClientIPAddress = jsonObject["clientIPAddress"]
+        };
+
+        if (Data.CraneName == "crane1")
+        {
+            CranesData["crane1"] = Data;
+            GridData.Add(Data);
+        }
+        else if (Data.CraneName == "crane2")
+        {
+            CranesData["crane2"] = Data;
+            GridData.Add(Data);
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    class CraneData
+    {
+        public string CraneName { get; set; }
+        public bool ConnectionStatus { get; set; }
+        public string ConnectedClientId { get; set; }
+        public string ClientIPAddress { get; set; }
+    }
+}

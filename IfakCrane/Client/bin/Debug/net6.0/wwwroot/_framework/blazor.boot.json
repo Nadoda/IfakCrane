@@ -7,6 +7,7 @@
   "linkerEnabled": false,
   "resources": {
     "assembly": {
+      "M2Mqtt.dll": "sha256-nb3iJmm9qlh81uPdmIS\/ojmqOVqPn6e8MV+lZ1LtKW0=",
       "Microsoft.AspNetCore.Authorization.dll": "sha256-aDNthpcgReHLCzS5ZT\/PJDirLd6siorRIngHWOCUfd4=",
       "Microsoft.AspNetCore.Components.dll": "sha256-QuQEF2UMucn5Vmy5DaA1xMY5DutdB0QhPYbnza2JJJ0=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-PCqolrqn+eWfQ\/KIakpqOwLmo9t9cThQzzpZ7dr+SjA=",
@@ -207,15 +208,15 @@
       "mscorlib.dll": "sha256-C3gpWQMELcHYfrHU\/1agQUvWTtSNs9Ul2suMxcKFnIc=",
       "netstandard.dll": "sha256-CgGkoZQx73t3qchcsu85kgBcgrjNEOiudArOwKNb18k=",
       "System.Private.CoreLib.dll": "sha256-6nUSjiT7okMlkN897OnDypwppYuK7JxTahOClXkAuwE=",
-      "IfakCrane.Shared.dll": "sha256-wFhKF+CXi+E3ag7BiBhRTz57wxNLFljGCpPz\/p56mNU=",
-      "IfakCrane.Client.dll": "sha256-+7h5knrXTFLwpdpku2qg04UXyio+Uxtl+AoaDSbAv\/k="
+      "IfakCrane.Shared.dll": "sha256-5E3PBDby1jhqpFYJbuGgWUWK2hO4qZZtJKrkkWuwWY4=",
+      "IfakCrane.Client.dll": "sha256-7gbwjEWbwPeZ9AgcSc4DdFCFeS0ZNRa0gBql2Q8nPjo="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "IfakCrane.Shared.pdb": "sha256-hfPUERimFEYnStBmANNKMjshy9TVEqZZeA5kLBbieMU=",
-      "IfakCrane.Client.pdb": "sha256-WivWNqfIhBtkuxbzxhEmmV0lHyqrnhJ81NrPxCOxoCc="
+      "IfakCrane.Shared.pdb": "sha256-Y6p+KywziN6OLj\/MkjmEy8UViIV54U0B0d1aG5\/UtNE=",
+      "IfakCrane.Client.pdb": "sha256-2KyWZrWMtsnrvvB4L41jC3A+MR\/RihV7MsdriND+UAo="
     },
     "runtime": {
       "dotnet.6.0.16.at85i9wpru.js": "sha256-GT2gK+GjOisRXJY+9yh6H8s6K\/KDIsaFMFIgWvAnttY=",

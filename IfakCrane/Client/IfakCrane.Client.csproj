@@ -7,10 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\test.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="M2MqttDotnetCore" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.16" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.10" />
@@ -20,18 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\IfakCrane.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\test.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\test.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\test.razor" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,50 @@
+﻿@using IfakCrane.Client.Services;
+
+
+<div class="rz-p-12 rz-text-align-center" style="width:100%">
+    <RadzenSelectBar class="mb-5" @bind-Value=@value TValue="string">
+        <Items>
+            @foreach (var dataItem in data)
+            {
+                <RadzenSelectBarItem Text="@dataItem.DisplayingName" Value="@dataItem.Name" Style="@($"background-color: {(value == dataItem.Name ? "blueviolet" : "inherit")}; color: {(value == dataItem.Name ? "white" : "inherit")}")" />
+            }
+        </Items>
+    </RadzenSelectBar>
+</div>
+
+
+@code {
+    public string? value ;
+
+    [Inject]
+    public SignalRService signalR { get; set; }
+
+    List<CraneClass> data = new List<CraneClass>
+    {
+        new CraneClass { Name="crane1", DisplayingName= "Crane1"},
+        new CraneClass { Name="crane2", DisplayingName= "Crane2"},
+        new CraneClass { Name="tandem", DisplayingName= "Tandem"}
+    };
+
+    protected async override Task OnInitializedAsync()
+    {
+        signalR.OnManualControlStatus += ManualControlHandler;
+    }
+
+    private async void ManualControlHandler(dynamic data)
+    {
+        value = data.GetString();
+        Console.WriteLine(data);
+        await InvokeAsync(StateHasChanged);
+    }
+   
+    
+    private class CraneClass
+    {
+        public string? Name { get; set; }
+        public string? DisplayingName { get; set; }
+    }
+    
+
+    
+}

@@ -20,8 +20,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Work/IfakCrane/IfakCrane/Client/Pages/CraneSelectBar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JhbmVTZWxlY3RCYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Work/IfakCrane/IfakCrane/Client/Pages/CraneUI.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JhbmVVSS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/IfakCrane/IfakCrane/Client/Pages/SettingPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ1BhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Work/IfakCrane/IfakCrane/Client/Pages/Test.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVzdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Work/IfakCrane/IfakCrane/Client/Shared/SurveyPrompt.razor]

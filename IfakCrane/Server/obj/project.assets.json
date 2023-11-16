@@ -1707,6 +1707,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "IfakCrane.Shared": "1.0.0",
+          "M2MqttDotnetCore": "1.1.0",
           "Microsoft.AspNetCore.Components.WebAssembly": "6.0.16",
           "Microsoft.AspNetCore.SignalR.Client": "7.0.10",
           "Newtonsoft.Json": "13.0.3",

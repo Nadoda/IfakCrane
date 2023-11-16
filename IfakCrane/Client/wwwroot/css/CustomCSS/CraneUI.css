@@ -1,6 +1,6 @@
 ﻿.blur-dot {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background-color: red;
     border-radius: 50%;
     position: absolute;
@@ -15,12 +15,13 @@
     border-radius: 50%;
     position: relative;
     right: 12px;
-    transition: transform 2s ease-in-out;
+   
 }
 
 .animated-card {
     width: 10px;
     height: 250px;
+    position:absolute;
     padding-top: 0px;
     padding-bottom: 0px;
     padding-right: 0px;
@@ -32,5 +33,12 @@
     margin-top: 0px;
     color: #7c7fec;
     background-color: #6980cc;
-    transition: transform 4s ease-in-out;
+    
 }
+.selected-item {
+    background-color: black;
+    color: white; /* You can adjust the text color to ensure readability */
+}
+/*:root {
+    --rz-selectbar-selected-background-color: --rz-primary-lighter;
+}*/

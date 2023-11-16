@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IfakCrane.Shared.Models
 {
-    public class TrolleyData
+    public class PositionData
     {
-        public string Identifier { get; set; }
+ 
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }

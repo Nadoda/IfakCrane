@@ -870,3 +870,7 @@ D:\Work\IfakCrane\IfakCrane\Client\obj\Debug\net6.0\IfakCrane.Client.dll
 D:\Work\IfakCrane\IfakCrane\Client\obj\Debug\net6.0\refint\IfakCrane.Client.dll
 D:\Work\IfakCrane\IfakCrane\Client\obj\Debug\net6.0\IfakCrane.Client.pdb
 D:\Work\IfakCrane\IfakCrane\Client\obj\Debug\net6.0\ref\IfakCrane.Client.dll
+D:\Work\IfakCrane\IfakCrane\Client\bin\Debug\net6.0\wwwroot\_framework\M2Mqtt.dll
+D:\Work\IfakCrane\IfakCrane\Client\bin\Debug\net6.0\wwwroot\_framework\M2Mqtt.dll.gz
+D:\Work\IfakCrane\IfakCrane\Client\bin\Debug\net6.0\M2Mqtt.dll
+D:\Work\IfakCrane\IfakCrane\Client\obj\Debug\net6.0\build-gz\LaomADQi.gz

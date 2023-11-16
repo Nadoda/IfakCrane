@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EdLDbqwsu8Jgez4USADqj441Nt1G0I2B//LLU9YBotA=",
+  "Hash": "LrAwJ0sIKkI4YwYXWuFKA761mFO5DuZ5xe/nkCqXhl4=",
   "Source": "IfakCrane.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -797,6 +797,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "D:\\Work\\IfakCrane\\IfakCrane\\Shared\\bin\\Debug\\net6.0\\IfakCrane.Shared.pdb"
+    },
+    {
+      "Identity": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\M2Mqtt.dll",
+      "SourceId": "IfakCrane.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/M2Mqtt.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\ajayn\\.nuget\\packages\\m2mqttdotnetcore\\1.1.0\\lib\\netcoreapp3.1\\M2Mqtt.dll"
     },
     {
       "Identity": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Authorization.dll",
@@ -6271,6 +6288,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.VisualBasic.dll"
+    },
+    {
+      "Identity": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\obj\\Debug\\net6.0\\build-gz\\LaomADQi.gz",
+      "SourceId": "IfakCrane.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/M2Mqtt.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\M2Mqtt.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\M2Mqtt.dll"
     },
     {
       "Identity": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\obj\\Debug\\net6.0\\build-gz\\ll+ZYe7o.gz",

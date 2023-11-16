@@ -1,48 +1,58 @@
-﻿@page "/blurdot"
-
-@using System.Drawing;
-@using Microsoft.AspNetCore.Components.Web;
-
-
+﻿@page "/test"
+@inject IJSRuntime jSRuntime
 <style>
-    .rectangle {
-        width: 300px;
-        height: 600px;
-        border: 1px solid black;
+    .container {
         position: relative;
+        width: 300px;
+        height: 300px;
+        border: 1px solid #000;
     }
 
-    .blur-dot {
-        width: 20px;
-        height: 20px;
-        background-color: red;
-        border-radius: 50%;
+    .circle {
         position: absolute;
-        filter: blur(10px); /* Apply blur effect */
-        transform: translate(-50%, -50%); /* Center the dot on the click point */
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        border-radius: 50%;
     }
 </style>
 
-<div class="rectangle" @onclick="AddBlurDot">
-    @if (showDot)
-    {
-        <div class="blur-dot" style="left: @dotXpx; top: @dotYpx;"></div>
-    }
+<h3>Drag the Circle</h3>
+
+<div class="container" @onmousemove="OnMouseMove" @onmouseup="OnMouseUp">
+    <div @ref="circle" class="circle" style="left: @dotXpx; top: @dotYpx;" @onmousedown="OnMouseDown"></div>
 </div>
 
 @code {
-    bool showDot = false;
-    int dotX = 0;
-    int dotY = 0;
-    string dotXpx => $"{dotX}px";
-    string dotYpx => $"{dotY}px";
+    bool isDragging = false;
+    private double circleX = 0;
+    private double circleY = 180;
+    double offsetX = 0;
+    double offsetY = 0;
+    string dotXpx => $"{circleX}px";
+    string dotYpx => $"{circleY}px";
+    private ElementReference circle;
 
-    void AddBlurDot(MouseEventArgs e)
+    void OnMouseDown(MouseEventArgs e)
     {
-        dotX = (int)e.ClientX;
-        dotY = (int)e.ClientY;
-        showDot = true;
+        isDragging = true;
+        offsetX = e.ClientX - circleX;
+        offsetY = e.ClientY - circleY;
+    }
+
+    void OnMouseMove(MouseEventArgs e)
+    {
+        if (isDragging)
+        {
+            circleX = e.ClientX - offsetX;
+            circleY = e.ClientY - offsetY;
+            jSRuntime.InvokeVoidAsync("updateCirclePosition", circle, circleX, circleY);
+            StateHasChanged();
+        }
+    }
+
+    void OnMouseUp()
+    {
+        isDragging = false;
     }
 }
-
-
