@@ -14,6 +14,16 @@ namespace IfakCrane.Server.Services
         {
            _Mqtt=Mqtt;
         }
+        
+        public void PublishToServer(string CraneName, string topic, string data)
+        {
+            _Mqtt.PublishToServer(CraneName,topic, data);
+        }
+        public void ConnectToMQTT(string CraneName, string IP_Address)
+        {
+            _Mqtt.ConnectToMQTTServer(CraneName, IP_Address);
+        }
+
         //public async void MqttConnectionStatus(string data)
         //{
         //    await Clients.All.SendAsync("MqttConnectionStatus", data);
@@ -41,15 +51,6 @@ namespace IfakCrane.Server.Services
         //}
 
         //    //      //         //
-        public void PublishToServer(string CraneName, string topic, string data)
-        {
-            _Mqtt.PublishToServer(CraneName,topic, data);
-        }
-        public void ConnectToMQTT(string CraneName, string IP_Address)
-        {
-            _Mqtt.ConnectToMQTTServer(CraneName, IP_Address);
-        }
-
 
     }
 }

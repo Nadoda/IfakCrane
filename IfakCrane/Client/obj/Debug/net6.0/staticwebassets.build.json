@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LrAwJ0sIKkI4YwYXWuFKA761mFO5DuZ5xe/nkCqXhl4=",
+  "Hash": "MWDCi3g4qWn96DHhiKdMEiuut9Kwg18Sm84xNBWpJH4=",
   "Source": "IfakCrane.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -8124,6 +8124,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\icon-192.png"
+    },
+    {
+      "Identity": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\wwwroot\\Images\\Walking.png",
+      "SourceId": "IfakCrane.Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "Images/Walking.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Walking.png"
     },
     {
       "Identity": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\wwwroot\\index.html",

@@ -24,20 +24,19 @@
         <label>Master:</label>
         <RadzenDropDown TValue="string" Value=@MasterTrolley Data=@Trolleys Change="@(args => MasterTrolley = $"{args}")" Style="margin-top: 5px;width:70%" />
         <label style="width:54px">Slave :</label>
-        <RadzenDropDown TValue="string" Value=@SlaveTrolley Data=@Trolleys Change="@(args => SlaveTrolley = $"{args}")" Style="margin-top: 5px;width:70%" />
+        <RadzenDropDown TValue="string" Value=@SlaveTrolley Data=@SlaveTrolleys Change="@(args => SlaveTrolley = $"{args}")" Style="margin-top: 5px;width:70%" />
     </RadzenCard>
 
     <RadzenCard Style="padding-top: 0px;margin-top:10px">
         <RadzenText Text="Function Selection" TextAlign="Radzen.TextAlign.Center" />
         <RadzenRadioButtonList Value="@SelectedFunction" TValue="string" Change=@(args => OnFunctionSelected($"{args}")) Orientation="Radzen.Orientation.Vertical" Name="" Visible="true">
             <Items>
-                @foreach (var functionName in functionNames)
+               @foreach (var functionName in functionNames)
                 {
                     <RadzenRadioButtonListItem Value="@functionName.Name" Text="@functionName.DisplayingName"></RadzenRadioButtonListItem>
                 }
             </Items>
         </RadzenRadioButtonList>
-       @* @SelectedFunction*@
     </RadzenCard>
     <button Style="margin-top:10px;width:100%;background-color:white;color:black" @onclick="StopButtonClick">Stop</button>
 </div>
@@ -52,85 +51,4 @@
     </div>
 </nav>
 
-@code {
 
-
-    [Inject]
-    public NavToCraneUICommService? navToCraneUI { get; set; }
-
-    [Inject]
-    public SignalRService? signalR { get; set; }
-
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    string MasterCrane = "crane1";
-    string SlaveCrane = "None";
-
-    IEnumerable<string> MasterCranes { get; set; } = new List<string> { "crane1", "crane2" };
-    IEnumerable<string> SlaveCranes { get; set; }
-
-    string MasterTrolley = "trolley1";
-    string SlaveTrolley = "None";
-
-    IEnumerable<string> Trolleys { get; set; } = new List<string> { "trolley1", "trolley2", "None" };
-
-    string SelectedFunction = "goto_topic";
-
-    List<Functions> functionNames = new List<Functions> 
-    {
-        new Functions { Name="goto_topic", DisplayingName= "Go-To"},
-        new Functions { Name="cometome_topic", DisplayingName= "Come-To"},
-        new Functions { Name="followme_topic", DisplayingName= "Follow"}
-    };
-
-    protected async override Task OnInitializedAsync()
-    {
-        navToCraneUI.CraneSelection(MasterCrane);
-        navToCraneUI.FunctionSelection(SelectedFunction);
-
-        if (MasterCrane == "crane1")
-        {
-            SlaveCranes = new List<string> { "crane2","None"};
-        }
-
-        await InvokeAsync(StateHasChanged);
-    }
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-    private async Task OnCraneSelected(string newValue)
-    {
-        MasterCrane = newValue;
-        await navToCraneUI.CraneSelection(newValue);
-        if (MasterCrane == "crane1")
-        {
-            SlaveCranes = new List<string> { "crane2", "None" };
-        }
-        else if (MasterCrane == "crane2")
-        {
-            SlaveCranes = new List<string> { "crane1", "None" };
-        }
-        await InvokeAsync(StateHasChanged);
-    }
-    private async Task OnFunctionSelected(string newValue)
-    {
-        SelectedFunction = newValue;
-        await navToCraneUI.FunctionSelection(newValue);
-        await InvokeAsync(StateHasChanged);
-    }
-
-    private async void StopButtonClick()
-    {
-       await Task.Run(() => { signalR.PublishToServer(MasterCrane,"button_stop_topic", JsonConvert.SerializeObject(new[] { "true" })); });
-
-    }
-
-    private class Functions
-    {
-        public string? Name { get; set; }
-        public string? DisplayingName { get; set; }
-    }
-}

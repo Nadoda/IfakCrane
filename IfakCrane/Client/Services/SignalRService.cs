@@ -14,15 +14,15 @@ namespace IfakCrane.Client.Services
         private readonly NavigationManager NavigationManager;
         public bool IsConnected { get { return hubConnection?.State == HubConnectionState.Connected; } }
 
+        public event Action<dynamic>? OnManualControlStatus;
+        public event Action<dynamic>? OnAutoModeStatus;
+        public event Action<dynamic>? OnMqttConnectionStatus;
+        public event Action<dynamic>? OnGoToStatus;
         // For Crane 1
         public event Action<dynamic>? OnReceivedPositionC1;
         // For Crane 2
         public event Action<dynamic>? OnReceivedPositionC2;
 
-        public event Action<dynamic>? OnManualControlStatus;
-        public event Action<dynamic>? OnAutoModeStatus;
-        public event Action<dynamic>? OnMqttConnectionStatus;
-        public event Action<dynamic>? OnGoToStatus;
         public SignalRService(NavigationManager navigationManager)
         {
             this.NavigationManager = navigationManager;
@@ -36,7 +36,8 @@ namespace IfakCrane.Client.Services
                 OnReceivedPositionC1?.Invoke(data);
 
             });
-  
+            //
+
             // For Crane 2
             hubConnection.On<dynamic>("PositionDataC2", data =>
             {
@@ -44,6 +45,7 @@ namespace IfakCrane.Client.Services
                 OnReceivedPositionC2?.Invoke(data);
 
             });
+            //
 
             hubConnection.On<dynamic>("ManualControlData", data =>
             {
@@ -73,7 +75,7 @@ namespace IfakCrane.Client.Services
         }
         public async Task StartConnection()
         {
-            if (hubConnection.State == HubConnectionState.Disconnected)
+            if (hubConnection?.State == HubConnectionState.Disconnected)
             {
                 await hubConnection.StartAsync();
             }

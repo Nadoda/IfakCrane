@@ -1,0 +1,12 @@
+D:\Work\IfakCrane\IfakCrane\Shared\bin\Release\net6.0\IfakCrane.Shared.deps.json
+D:\Work\IfakCrane\IfakCrane\Shared\bin\Release\net6.0\IfakCrane.Shared.dll
+D:\Work\IfakCrane\IfakCrane\Shared\bin\Release\net6.0\IfakCrane.Shared.pdb
+D:\Work\IfakCrane\IfakCrane\Shared\obj\Release\net6.0\IfakCrane.Shared.csproj.AssemblyReference.cache
+D:\Work\IfakCrane\IfakCrane\Shared\obj\Release\net6.0\IfakCrane.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\IfakCrane\IfakCrane\Shared\obj\Release\net6.0\IfakCrane.Shared.AssemblyInfoInputs.cache
+D:\Work\IfakCrane\IfakCrane\Shared\obj\Release\net6.0\IfakCrane.Shared.AssemblyInfo.cs
+D:\Work\IfakCrane\IfakCrane\Shared\obj\Release\net6.0\IfakCrane.Shared.csproj.CoreCompileInputs.cache
+D:\Work\IfakCrane\IfakCrane\Shared\obj\Release\net6.0\IfakCrane.Shared.dll
+D:\Work\IfakCrane\IfakCrane\Shared\obj\Release\net6.0\refint\IfakCrane.Shared.dll
+D:\Work\IfakCrane\IfakCrane\Shared\obj\Release\net6.0\IfakCrane.Shared.pdb
+D:\Work\IfakCrane\IfakCrane\Shared\obj\Release\net6.0\ref\IfakCrane.Shared.dll

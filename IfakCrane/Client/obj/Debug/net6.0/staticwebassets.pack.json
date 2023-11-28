@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\IfakCrane.Client.styles.css"
     },
     {
+      "Id": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\wwwroot\\Images\\Walking.png",
+      "PackagePath": "staticwebassets\\Images\\Walking.png"
+    },
+    {
       "Id": "D:\\Work\\IfakCrane\\IfakCrane\\Client\\wwwroot\\JavaScript.js",
       "PackagePath": "staticwebassets\\JavaScript.js"
     },

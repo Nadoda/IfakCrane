@@ -19,7 +19,7 @@ namespace IfakCrane.Server.Services
         public MQTTService(IHubContext<SignalRHub> hubContext)
         {
 
-            InitializedConnection();
+            //InitializedConnection();
             _hubContext = hubContext;
         }
 
