@@ -16,7 +16,7 @@ namespace IfakCrane.Client.Shared
             "crane1",
             "crane2"
         };
-        IEnumerable<string> SlaveCranes { get; set; }
+        IEnumerable<string>? SlaveCranes { get; set; }
 
         string MasterTrolley = "trolley1";
         IEnumerable<string> Trolleys { get; set; } = new List<string>
@@ -59,8 +59,8 @@ namespace IfakCrane.Client.Shared
         public SignalRService? signalR { get; set; }
         protected async override Task OnInitializedAsync()
         {
-            navToCraneUI.CraneSelection(MasterCrane);
-            navToCraneUI.FunctionSelection(SelectedFunction);
+            navToCraneUI?.CraneSelection(MasterCrane);
+            navToCraneUI?.FunctionSelection(SelectedFunction);
             if (MasterCrane == "crane1")
             {
                 SlaveCranes = new List<string>
@@ -83,7 +83,7 @@ namespace IfakCrane.Client.Shared
         private async Task OnCraneSelected(string newValue)
         {
             MasterCrane = newValue;
-            await navToCraneUI.CraneSelection(newValue);
+            await navToCraneUI?.CraneSelection(newValue);
             if (MasterCrane == "crane1")
             {
                 SlaveCranes = new List<string>

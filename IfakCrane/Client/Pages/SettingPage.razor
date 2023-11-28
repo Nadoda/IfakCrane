@@ -19,7 +19,7 @@
             </RadzenRow>
     </RadzenStack>
 </RadzenFieldset>
-
+<RadzenNotification />
 
 <RadzenDataGrid Style="margin-top:20px" AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@GridData" TItem="CraneData" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
@@ -40,6 +40,9 @@
     List<CraneData>? GridData = new List<CraneData>();
     string? Crane;
     string? IpAddress;
+
+    [Inject]
+    public NotificationService? notificationService { get; set; }
     [Inject]
     public SignalRService? signalR { get; set; }
 
@@ -64,6 +67,7 @@
         {
             IpAddress = null;
             Console.WriteLine($"IP Address {value} is not valid");
+            notificationService?.Notify(new NotificationMessage() { Severity = NotificationSeverity.Info, Detail = $"IP Address {value} is not valid" });
         }
 
     }
@@ -71,7 +75,7 @@
     {
         if(Crane != null && IpAddress != null)
         {
-            signalR.ConnectToMQTT(Crane, IpAddress);
+            signalR?.ConnectToMQTT(Crane, IpAddress);
         }
         else
         {
@@ -79,7 +83,7 @@
         }
 
     }
-    private async void MqttConnectionStatusHandler(dynamic data)   // Animation on x-axis
+    private async void MqttConnectionStatusHandler(dynamic data)   
     {
         var jsonObject = JsonConvert.DeserializeObject<dynamic>(data.ToString());
         var Data = new CraneData()
@@ -93,12 +97,12 @@
         if (Data.CraneName == "crane1")
         {
             CranesData["crane1"] = Data;
-            GridData.Add(Data);
+            GridData?.Add(Data);
         }
         else if (Data.CraneName == "crane2")
         {
             CranesData["crane2"] = Data;
-            GridData.Add(Data);
+            GridData?.Add(Data);
         }
 
         await InvokeAsync(StateHasChanged);
@@ -106,9 +110,9 @@
 
     class CraneData
     {
-        public string CraneName { get; set; }
-        public bool ConnectionStatus { get; set; }
-        public string ConnectedClientId { get; set; }
-        public string ClientIPAddress { get; set; }
+        public string? CraneName { get; set; }
+        public bool? ConnectionStatus { get; set; }
+        public string? ConnectedClientId { get; set; }
+        public string? ClientIPAddress { get; set; }
     }
 }

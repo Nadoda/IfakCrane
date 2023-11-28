@@ -233,7 +233,7 @@ namespace IfakCrane.Client.Pages
                     $"{(int)((-53200 * dotY / 300) + (53200 * 500 / 300))}",
                     "11400"
                 };
-                signalR.PublishToServer(selectedMasterCrane, "goto_topic", JsonConvert.SerializeObject(PublishingDataArray));
+                signalR?.PublishToServer(selectedMasterCrane, "goto_topic", JsonConvert.SerializeObject(PublishingDataArray));
             }
             else if (selectedMasterCrane == "crane2" && dotY <= 300)
             {
@@ -249,11 +249,11 @@ namespace IfakCrane.Client.Pages
                     $"{(int)((-dotY * 53200 / 300) + 90808)}",
                     "0"
                 }; // 797px approx 800px
-                signalR.PublishToServer(selectedMasterCrane, "goto_topic", JsonConvert.SerializeObject(PublishingDataArray));
+                signalR?.PublishToServer(selectedMasterCrane, "goto_topic", JsonConvert.SerializeObject(PublishingDataArray));
             }
             else
             {
-                notificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Info, Detail = $"Out of the {selectedMasterCrane} region" });
+                notificationService?.Notify(new NotificationMessage() { Severity = NotificationSeverity.Info, Detail = $"Out of the {selectedMasterCrane} region" });
             }
         }
 
@@ -316,7 +316,7 @@ namespace IfakCrane.Client.Pages
                         $"{(int)((-53200 * circleY / 300) + (53200 * 500 / 300))}",
                         "11400"
                     };
-                    signalR.PublishToServer(selectedMasterCrane, "cometome_topic", JsonConvert.SerializeObject(PublishingDataArray));
+                    signalR?.PublishToServer(selectedMasterCrane, "cometome_topic", JsonConvert.SerializeObject(PublishingDataArray));
                 }
                 else if (selectedMasterCrane == "crane2" && circleY <= 300)
                 {
@@ -332,11 +332,11 @@ namespace IfakCrane.Client.Pages
                         $"{(int)((-circleY * 53200 / 300) + 90808)}",
                         "0"
                     }; // 797px approx 800px
-                    signalR.PublishToServer(selectedMasterCrane, "cometome_topic", JsonConvert.SerializeObject(PublishingDataArray));
+                    signalR?.PublishToServer(selectedMasterCrane, "cometome_topic", JsonConvert.SerializeObject(PublishingDataArray));
                 }
                 else
                 {
-                    notificationService.Notify(new NotificationMessage() { Severity = NotificationSeverity.Info, Detail = $"Out of the {selectedMasterCrane} region" });
+                    notificationService?.Notify(new NotificationMessage() { Severity = NotificationSeverity.Info, Detail = $"Out of the {selectedMasterCrane} region" });
                 }
             }
         }
@@ -362,7 +362,7 @@ namespace IfakCrane.Client.Pages
                             $"{(int)((-53200 * circleY / 300) + (53200 * 500 / 300))}",
                             "11400"
                         };
-                        signalR.PublishToServer(selectedMasterCrane, "followme_topic", JsonConvert.SerializeObject(PublishingDataArray));
+                        signalR?.PublishToServer(selectedMasterCrane, "followme_topic", JsonConvert.SerializeObject(PublishingDataArray));
                     }
                     else if (selectedMasterCrane == "crane2" && circleY <= 300)
                     {
@@ -378,7 +378,7 @@ namespace IfakCrane.Client.Pages
                             $"{(int)((-circleY * 53200 / 300) + 90808)}",
                             "0"
                         };
-                        signalR.PublishToServer(selectedMasterCrane, "followme_topic", JsonConvert.SerializeObject(PublishingDataArray));
+                        signalR?.PublishToServer(selectedMasterCrane, "followme_topic", JsonConvert.SerializeObject(PublishingDataArray));
                     }
                     else
                     {
