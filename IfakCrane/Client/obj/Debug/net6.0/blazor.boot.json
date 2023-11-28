@@ -209,14 +209,14 @@
       "netstandard.dll": "sha256-CgGkoZQx73t3qchcsu85kgBcgrjNEOiudArOwKNb18k=",
       "System.Private.CoreLib.dll": "sha256-6nUSjiT7okMlkN897OnDypwppYuK7JxTahOClXkAuwE=",
       "IfakCrane.Shared.dll": "sha256-JAU5+CIu+O6+5LcptzpUHvNeiqvu0avHqmXkXVZ3D24=",
-      "IfakCrane.Client.dll": "sha256-DCXIGM83TFJ76H5IBFIP9xuz9FHBXJqbKV2\/VrptPew="
+      "IfakCrane.Client.dll": "sha256-G9\/SUzpoJpuC1ly9uqlA3rqbTq4jbN1LqUpckkpvt4Q="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
       "IfakCrane.Shared.pdb": "sha256-ouLHFclNyarEr03iDv2rQxQBo4diBT0iVABBAK3f4gQ=",
-      "IfakCrane.Client.pdb": "sha256-A\/F6qlhVhB87q8esTCLaxyPToaXvWtKrJNrSohy17qU="
+      "IfakCrane.Client.pdb": "sha256-nGdD1gQzSZyD\/AFGwqb55fIpWcnOE0XsuU1xmmFNV8I="
     },
     "runtime": {
       "dotnet.6.0.16.at85i9wpru.js": "sha256-GT2gK+GjOisRXJY+9yh6H8s6K\/KDIsaFMFIgWvAnttY=",

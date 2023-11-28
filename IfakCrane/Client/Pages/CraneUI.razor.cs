@@ -88,6 +88,7 @@ namespace IfakCrane.Client.Pages
                 isDragging = false;
                 offsetX = 0;
                 offsetY = 0;
+                dotX= 0; dotY = 0;  
             }
             else if (SelectedFunction == "followme_topic")
             {
@@ -97,6 +98,7 @@ namespace IfakCrane.Client.Pages
                 isDragging = false;
                 offsetX = 0;
                 offsetY = 0;
+                dotX = 0; dotY = 0;
                 await Follow_Me_Function();
             }
 
