@@ -12,40 +12,49 @@ namespace IfakCrane.Server.Services
     public class MQTTService
     {
         private readonly IHubContext<SignalRHub> _hubContext;
+        private readonly ILogger<MQTTService> _logger;
 
         public MqttClient? client1 { get; private set; }
         public MqttClient? client2 { get; private set; }
 
-        public MQTTService(IHubContext<SignalRHub> hubContext)
+        public MQTTService(IHubContext<SignalRHub> hubContext,ILogger<MQTTService> logger)
         {
-
-            InitializedConnection();
             _hubContext = hubContext;
+            _logger = logger;
+            InitializedConnection();
         }
 
         public void InitializedConnection() 
         {
-            client1 = new MqttClient("172.16.53.11");  //172.16.53.11 
-            string clientId1 = Guid.NewGuid().ToString();
-            client1.Connect(clientId1);
-            client1.Subscribe(new string[] { "position_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client1.Subscribe(new string[] { "manual_control_status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client1.Subscribe(new string[] { "auto_mode_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client1.Subscribe(new string[] { "status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+            try
+            {
+                client1 = new MqttClient("172.16.53.11");  //172.16.53.11 
+                string clientId1 = Guid.NewGuid().ToString();
+                client1.Connect(clientId1);
+                client1.Subscribe(new string[] { "position_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                client1.Subscribe(new string[] { "manual_control_status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                client1.Subscribe(new string[] { "auto_mode_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                client1.Subscribe(new string[] { "status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
 
-            client1.MqttMsgPublishReceived += SubscribeToServer1;
-          
-            // client2 configuration //
+                client1.MqttMsgPublishReceived += SubscribeToServer1;
 
-            client2 = new MqttClient("172.16.53.12");  //172.16.53.12
-            string clientId2 = Guid.NewGuid().ToString();
-            client2.Connect(clientId2);
-            client2.Subscribe(new string[] { "position_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client2.Subscribe(new string[] { "manual_control_status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client2.Subscribe(new string[] { "auto_mode_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client2.Subscribe(new string[] { "status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-          
-            client2.MqttMsgPublishReceived += SubscribeToServer2;
+                // client2 configuration //
+
+                client2 = new MqttClient("172.16.53.12");  //172.16.53.12
+                string clientId2 = Guid.NewGuid().ToString();
+                client2.Connect(clientId2);
+                client2.Subscribe(new string[] { "position_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                client2.Subscribe(new string[] { "manual_control_status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                client2.Subscribe(new string[] { "auto_mode_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                client2.Subscribe(new string[] { "status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+
+                client2.MqttMsgPublishReceived += SubscribeToServer2;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message + " ------->   Plug in the LAN cable & try to connect from the GUI's setting page");
+            }
+           
         }
         public async void ConnectToMQTTServer(string CraneName,string IP_Address)
         {
@@ -71,9 +80,9 @@ namespace IfakCrane.Server.Services
                     client1.Subscribe(new string[] { "status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
                     client1.MqttMsgPublishReceived += SubscribeToServer1;
                 }
-                catch
+                catch(Exception e)
                 {
-                    Console.WriteLine($"Connection Error! with {IP_Address} server !Try Again!");
+                    _logger.LogError(e.Message + $" -------> Connection Error! with {IP_Address} server !Try Again!");
                 } 
                 
             }
@@ -98,23 +107,45 @@ namespace IfakCrane.Server.Services
                     client2.Subscribe(new string[] { "status_topic" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
                     client2.MqttMsgPublishReceived += SubscribeToServer2;
                 }
-                catch
+                catch (Exception e)
                 {
-                    Console.WriteLine($"Connection Error! with {IP_Address} server !Try Again!");
+                    _logger.LogError(e.Message + $" ---------> Connection Error! with {IP_Address} server !Try Again!");
                 }
             }
         }
 
         public void PublishToServer(string CraneName, string topic, string data)
         {
-            if (CraneName == "crane1")
+            try
             {
-                client1.Publish(topic, Encoding.UTF8.GetBytes(data));
+                if (CraneName == "crane1")
+                {
+                    if (client1.IsConnected)
+                    {
+                        client1?.Publish(topic, Encoding.UTF8.GetBytes(data));
+                    }
+                    else
+                    {
+                        _logger.LogError( $" ---------> Connection Error! with {CraneName} server ! Check the connection or reconnect from the GUI's setting page!");
+                    }
+                    
+                }
+                else if (CraneName == "crane2")
+                {
+                    if (client2.IsConnected)
+                    {
+                        client2?.Publish(topic, Encoding.UTF8.GetBytes(data));
+                    }
+                    else
+                    {
+                        _logger.LogError( $" ---------> Connection Error! with {CraneName} server ! Check the connection or reconnect from the GUI's setting page!");
+                    }
+                }
             }
-            else if (CraneName == "crane2")
+            catch (Exception e)
             {
-                client2.Publish(topic, Encoding.UTF8.GetBytes(data)); 
-            }           
+               _logger.LogError(e.Message);
+            }                  
         }
         public async void SubscribeToServer1(object sender, MqttMsgPublishEventArgs e)
         {
